@@ -1,0 +1,27 @@
+server:
+  port: 8888
+  
+eureka:
+  client:
+    service-url:
+      defaulZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    
+spring:
+  application:
+    name: usk-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: department
+        uri: lb://department-service
+        predicates:
+        - Path=/employees/**
+      - id: employee
+        uri: lb://employee-service
+        predicates:
+        - Path=/dept/**
+          
+      
+      
